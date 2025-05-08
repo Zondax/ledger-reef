@@ -21,7 +21,16 @@ import { models, defaultOptions } from './common'
 // @ts-expect-error missing typings
 import ed25519 from 'ed25519-supercop'
 import { blake2bFinal, blake2bInit, blake2bUpdate } from 'blakejs'
-import { txBalances_transfer, txSession_setKeys, txStaking_nominate, txProxy_proxy, txUtility_batch } from './zemu_blobs'
+import {
+  txBalances_transfer,
+  txSession_setKeys,
+  txStaking_nominate,
+  txUtility_batch,
+  txBalances_transferAll,
+  txBalances_forceTransfer,
+  txBalances_setBalance,
+  txBalances_transferKeepAlive,
+} from './zemu_blobs'
 
 jest.setTimeout(180000)
 
@@ -31,16 +40,28 @@ const TXNS = [
     blob: txBalances_transfer,
   },
   {
+    name: 'balances_transfer_all',
+    blob: txBalances_transferAll,
+  },
+  {
+    name: 'balances_force_transfer',
+    blob: txBalances_forceTransfer,
+  },
+  {
+    name: 'balances_setBalance',
+    blob: txBalances_setBalance,
+  },
+  {
+    name: 'balances_transferKeepAlive',
+    blob: txBalances_transferKeepAlive,
+  },
+  {
     name: 'session_setkeys',
     blob: txSession_setKeys,
   },
   {
     name: 'staking_nominate',
     blob: txStaking_nominate,
-  },
-  {
-    name: 'proxy_proxy',
-    blob: txProxy_proxy,
   },
   {
     name: 'txUtility_batch',
@@ -53,7 +74,7 @@ describe.each(TXNS)('Transactions', function (data) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+      const app = newSubstrateApp(sim.getTransport(), 'Reef')
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -94,7 +115,7 @@ test.concurrent.each(models)('balances transfer expert', async function (m) {
   const sim = new Zemu(m.path)
   try {
     await sim.start({ ...defaultOptions, model: m.name })
-    const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+    const app = newSubstrateApp(sim.getTransport(), 'Reef')
     const pathAccount = 0x80000000
     const pathChange = 0x80000000
     const pathIndex = 0x80000000

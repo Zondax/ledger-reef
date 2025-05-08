@@ -40,7 +40,7 @@ describe.each(TESTS)('Raw signing', function (data) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+      const app = newSubstrateApp(sim.getTransport(), 'Reef')
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -83,7 +83,7 @@ test.concurrent.each(models)('raw signing - incorrect', async function (m) {
   const sim = new Zemu(m.path)
   try {
     await sim.start({ ...defaultOptions, model: m.name })
-    const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+    const app = newSubstrateApp(sim.getTransport(), 'Reef')
     const pathAccount = 0x80000000
     const pathChange = 0x80000000
     const pathIndex = 0x80000000
