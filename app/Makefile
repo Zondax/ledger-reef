@@ -27,7 +27,7 @@ endif
 include $(BOLOS_SDK)/Makefile.defines
 
 ifndef COIN
-COIN=KSM
+COIN=REEF
 endif
 $(info COIN  = [$(COIN)])
 VARIANT_PARAM=COIN
@@ -40,11 +40,11 @@ VARIANT_VALUES=$(COIN)
 # and SLIP-0044 standards.
 # If your app needs it, you can specify multiple path by using:
 # `PATH_APP_LOAD_PARAMS = "44'/1'" "45'/1'"`
-APPPATH = "44'/434'" "44'/354'"
+APPPATH = "44'/819'"
 
-ifeq ($(COIN),KSM)
+ifeq ($(COIN),REEF)
 # Main app configuration
-APPNAME = "Kusama"
+APPNAME = "Reef"
 ICON_NAME = icon
 endif
 
@@ -82,8 +82,8 @@ ICON_FLEX = flex_icon.gif
 # Possibles curves are: secp256k1, secp256r1, ed25519 and bls12381g1
 # If your app needs it, you can specify multiple curves by using:
 # `CURVE_APP_LOAD_PARAMS = <curve1> <curve2>`
-ifeq ($(COIN),KSM)
-CURVE_APP_LOAD_PARAMS = ed25519 secp256k1
+ifeq ($(COIN), REEF)
+CURVE_APP_LOAD_PARAMS = ed25519
 endif
 
 INCLUDES_PATH += $(CURDIR)/src/common
