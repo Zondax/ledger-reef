@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2023 Zondax AG
+ *  (c) 2019 - 2025 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -24,15 +24,15 @@ extern "C" {
 
 #include "parser_common.h"
 #include "stdbool.h"
-#include "substrate_dispatch_V20.h"
+#include "substrate_dispatch_V2.h"
 
 #define GEN_GETCALL(CALL) _getpdCall_##CALL(ctx->tx_obj->transactionVersion)
 #define GEN_DEC_GETCALL(CALL) uint32_t _getpdCall_##CALL(uint32_t txVersion)
 #define GEN_DEF_GETCALL(CALL)                        \
     uint32_t _getpdCall_##CALL(uint32_t txVersion) { \
         switch (txVersion) {                         \
-            case 20:                                 \
-                return PD_CALL_##CALL##_V20;         \
+            case 2:                                  \
+                return PD_CALL_##CALL##_V2;          \
                                                      \
             default:                                 \
                 return 0;                            \

@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2024  Zondax AG
+ *  (c) 2019 - 2025  Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -148,8 +148,7 @@ GEN_DEC_READFIX_UNSIGNED(64);
         snprintf(outValue, outValueLen, "<Empty>");                                                  \
         return parser_ok;                                                                            \
     }                                                                                                \
-    /* We need to do it twice because there is no memory to keep intermediate                        \
-     * results*/                                                                                     \
+    /* We need to do it twice because there is no memory to keep intermediate results*/              \
     /* First count*/                                                                                 \
     parser_init(&ctx, v->_ptr, v->_lenBuffer);                                                       \
     for (uint64_t i = 0; i < v->_len; i++) {                                                         \
