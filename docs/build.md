@@ -182,7 +182,12 @@ The Makefile will build the firmware in a docker container and leave the binary 
   *Warning: The application will be deleted before uploading.*
 
    ```
-   make load          # Builds and loads the app to the device
+   make loadSP          # Builds and loads the app to the device S+
+   make loadS          # Builds and loads the app to the device X
+   make loadST          # Builds and loads the app to the device Stax
+   make loadFL          # Builds and loads the app to the device Flex
+
+
    ```
 
 ## APDU Specifications

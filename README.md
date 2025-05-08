@@ -1,7 +1,7 @@
-# Ledger Kusama App
+# Ledger Reef App
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GithubActions](https://github.com/zondax/ledger-kusama/actions/workflows/main.yml/badge.svg)](https://github.com/Zondax/ledger-kusama/blob/main/.github/workflows/main.yaml)
+[![GithubActions](https://github.com/zondax/ledger-reef/actions/workflows/main.yml/badge.svg)](https://github.com/Zondax/ledger-reef/blob/main/.github/workflows/main.yaml)
 
 ---
 
@@ -12,9 +12,9 @@ _Please visit our website at [zondax.ch](https://www.zondax.ch)_
 
 ---
 
-This project contains the Kusama app (https://kusama.network/) for Ledger Nano S and X.
+This project contains the Reef app (<https://reef.io/>) for Ledger Nano S+, X, Stax and Flex.
 
-- Ledger Nano S/X BOLOS app
+- Ledger Nano S+/X/Stax/Flex BOLOS app
 - Specs / Documentation
 - C++ unit tests
 - Zemu tests
@@ -28,6 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
+
 # Reef  2.10.x
 
 ## System
@@ -290,4 +291,3 @@ Empty
 |unbond|||||
 |withdraw|||||
 |vote_candidate||||`AccountId`candidate<br/>|
-
