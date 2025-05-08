@@ -83,11 +83,43 @@ typedef struct {
 // Common types
 ////////////////////////
 
+typedef compactInt_t pd_Compactu32_t;  // u32
+typedef compactInt_t pd_Compactu64_t;  // u64
+typedef compactInt_t pd_CompactAssignments_t;
+typedef compactInt_t pd_CompactBountyIndex_t;
+typedef compactInt_t pd_CompactEraIndex_t;
+typedef compactInt_t pd_CompactMemberCount_t;
+typedef compactInt_t pd_CompactMoment_t;
+typedef compactInt_t pd_CompactPropIndex_t;
+typedef compactInt_t pd_CompactProposalIndex_t;
+typedef compactInt_t pd_CompactReferendumIndex_t;
+typedef compactInt_t pd_CompactRegistrarIndex_t;
+typedef compactInt_t pd_CompactWeight_t;
+
+typedef enum { eAddressIndex = 0, eAddressId = 1 } pd_Address_e;
+
 typedef struct {
-    uint8_t type;
+    pd_Address_e type;
+    uint64_t idx;
+    const uint8_t *idPtr;
+} pd_Address_t;
+
+typedef struct {
+    compactInt_t index;
+} pd_CompactIndex_t;
+
+typedef struct {
+    compactInt_t value;
+} pd_CompactBalance_t;
+
+typedef struct {
+    uint8_t value;
     const uint8_t *_ptr;
-    uint8_t _len;
 } pd_Data_t;
+
+typedef struct {
+    const uint8_t *_ptr;
+} pd_AccountId_t;
 
 typedef struct {
     pd_Data_t data1;
@@ -109,14 +141,63 @@ typedef struct {
 } pd_Call_t;
 
 typedef struct {
+    pd_u32_t digest_interval;
+    pd_u32_t digest_levels;
+} pd_ChangesTrieConfiguration_t;
+
+typedef struct {
+    compactInt_t value;
+} pd_CompactPerBill_t;
+
+typedef struct {
+    uint32_t value;
+} pd_CurrencyId_t;
+
+typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_Header_t;
 
 typedef struct {
+    const uint8_t *_ptr;
+} pd_KeyValue_t;
+
+typedef struct {
+    const uint8_t *_ptr;
+} pd_Key_t;
+
+typedef struct {
+    compactInt_t value;
+} pd_CompactAccountIndex_t;
+
+typedef struct {
     uint8_t some;
     pd_u8_array_20_t contained;
 } pd_Optionu8_array_20_t;
+
+typedef struct {
+    uint8_t value;
+} pd_Percent_t;
+
+typedef struct {
+    uint64_t value;
+} pd_Period_t;
+
+typedef struct {
+    pd_u32_t dependency_id;
+    uint8_t weight;
+    pd_bool_t is_exclusive;
+} pd_StreamDependency_t;
+
+typedef struct {
+    pd_BlockNumber_t height;
+    uint32_t index;
+} pd_Timepoint_t;
+
+typedef struct {
+    pd_AccountId_t id;
+    pd_Data_t data;
+} pd_TupleAccountIdData_t;
 
 typedef struct {
     uint64_t _len;
@@ -129,8 +210,49 @@ typedef struct {
 } pd_BalanceOf_t;
 
 typedef struct {
+    pd_VecTupleDataData_t additional;
+    pd_Data_t display;
+    pd_Data_t legal;
+    pd_Data_t web;
+    pd_Data_t riot;
+    pd_Data_t email;
+    pd_Optionu8_array_20_t pgp_fingerprint;
+    pd_Data_t image;
+    pd_Data_t twitter;
+} pd_IdentityInfo_t;
+
+typedef struct {
+    pd_Call_t call;
+} pd_OpaqueCall_t;
+
+typedef struct {
+    uint8_t some;
+    pd_ChangesTrieConfiguration_t contained;
+} pd_OptionChangesTrieConfiguration_t;
+
+typedef struct {
+    uint8_t some;
+    pd_Timepoint_t contained;
+} pd_OptionTimepoint_t;
+
+typedef struct {
+    uint32_t stream_id;
+    pd_StreamDependency_t dependency;
+} pd_Priority_t;
+
+typedef struct {
     pd_Call_t call;
 } pd_Proposal_t;
+
+typedef struct {
+    uint8_t value;
+    pd_AccountId_t accountId;
+} pd_RewardDestination_t;
+
+typedef struct {
+    pd_CompactPerBill_t commission;
+    pd_bool_t blocked;
+} pd_ValidatorPrefs_t;
 
 typedef struct {
     uint64_t _len;
@@ -142,11 +264,84 @@ typedef struct {
 typedef struct {
     uint64_t _len;
     const uint8_t *_ptr;
+    uint64_t _lenBuffer;
+} pd_VecTupleAccountIdData_t;
+
+typedef struct {
+    pd_Compactu64_t refTime;
+    pd_Compactu64_t proofSize;
+} pd_Weight_t;
+
+typedef struct {
+    uint32_t value;
+} pd_AccountIndex_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_AmountOf_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_AsOriginId_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_BabeEquivocationProof_t;
+
+typedef struct {
+    uint64_t _len;
+    const uint8_t *_ptr;
 } pd_Bytes_t;
+
+typedef struct {
+    uint8_t value;
+    union {
+        pd_AccountId_t id;
+        pd_CompactAccountIndex_t index;
+        pd_Bytes_t raw;
+        const uint8_t *_ptr;
+    };
+} pd_LookupSource_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_CallOf_t;
 
 typedef struct {
     compactInt_t value;
 } pd_CompactBalanceOf_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_CurrencyIdOf_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_DispatchTime_t;
+
+typedef struct {
+    const uint8_t *_ptr;
+} pd_EcdsaSignature_t;
+
+typedef struct {
+    uint32_t value;
+} pd_EraIndex_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_EvmAddress_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_GrandpaEquivocationProof_t;
 
 typedef struct {
     const uint8_t *_ptr;
@@ -162,9 +357,90 @@ typedef struct {
 } pd_Heartbeat_t;
 
 typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_IdentityFields_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_IdentityJudgement_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_KeyOwnerProof_t;
+
+typedef struct {
+    const uint8_t *_ptr;
+} pd_Keys_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_LockDuration_t;
+
+typedef struct {
+    uint32_t value;
+} pd_MemberCount_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_NextConfigDescriptor_t;
+
+typedef struct {
+    uint8_t some;
+    pd_AccountId_t contained;
+} pd_OptionAccountId_t;
+
+typedef struct {
+    uint8_t some;
+    pd_CurrencyId_t contained;
+} pd_OptionCurrencyId_t;
+
+typedef struct {
+    uint8_t some;
+    pd_Percent_t contained;
+} pd_OptionPercent_t;
+
+typedef struct {
+    uint8_t some;
+    pd_Period_t contained;
+} pd_OptionPeriod_t;
+
+typedef struct {
     uint8_t some;
     pd_u32_t contained;
 } pd_Optionu32_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_PalletsOrigin_t;
+
+typedef struct {
+    uint32_t value;
+} pd_Perbill_t;
+
+typedef struct {
+    uint32_t value;
+} pd_RegistrarIndex_t;
+
+typedef struct {
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_ScheduleTaskIndex_t;
+
+typedef struct {
+    const uint8_t *_ptr;
+} pd_Signature_t;
+
+typedef struct {
+    uint64_t _len;
+    const uint8_t *_ptr;
+    uint64_t _lenBuffer;
+} pd_VecAccountId_t;
 
 typedef struct {
     uint64_t _len;
@@ -172,51 +448,29 @@ typedef struct {
     uint64_t _lenBuffer;
 } pd_VecHeader_t;
 
-////////////////////////
-// /Common types
-////////////////////////
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wextern-c-compat"
-#pragma clang diagnostic pop
-
-////////////////////////
-// Types that require out of order declaration
-////////////////////////
-
-typedef enum { eAddressIndex = 0, eAddressId = 1 } pd_Address_e;
+typedef struct {
+    uint64_t _len;
+    const uint8_t *_ptr;
+    uint64_t _lenBuffer;
+} pd_VecKeyValue_t;
 
 typedef struct {
-    pd_Address_e type;
-    uint64_t idx;
-    const uint8_t *idPtr;
-} pd_Address_t;
+    uint64_t _len;
+    const uint8_t *_ptr;
+    uint64_t _lenBuffer;
+} pd_VecKey_t;
 
 typedef struct {
-    compactInt_t index;
-} pd_CompactIndex_t;
+    uint64_t _len;
+    const uint8_t *_ptr;
+    uint64_t _lenBuffer;
+} pd_VecLookupSource_t;
 
 typedef struct {
-    compactInt_t value;
-} pd_CompactBalance_t;
-
-////////////////////////
-////////////////////////
-////////////////////////
-////////////////////////
-
-typedef compactInt_t pd_Compactu32_t;  // u32
-typedef compactInt_t pd_Compactu64_t;  // u64
-typedef compactInt_t pd_CompactAssignments_t;
-typedef compactInt_t pd_CompactBountyIndex_t;
-typedef compactInt_t pd_CompactEraIndex_t;
-typedef compactInt_t pd_CompactMemberCount_t;
-typedef compactInt_t pd_CompactMoment_t;
-typedef compactInt_t pd_CompactPropIndex_t;
-typedef compactInt_t pd_CompactProposalIndex_t;
-typedef compactInt_t pd_CompactReferendumIndex_t;
-typedef compactInt_t pd_CompactRegistrarIndex_t;
-typedef compactInt_t pd_CompactWeight_t;
+    uint64_t _len;
+    const uint8_t *_ptr;
+    uint64_t _lenBuffer;
+} pd_Vecu32_t;
 
 #ifdef __cplusplus
 }
