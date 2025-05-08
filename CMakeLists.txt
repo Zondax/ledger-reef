@@ -13,7 +13,7 @@
 # *  See the License for the specific language governing permissions and
 # *  limitations under the License.
 # ********************************************************************************
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.28)
 include("cmake/HunterGate.cmake")
 HunterGate(
     URL "https://github.com/cpp-pm/hunter/archive/v0.25.5.tar.gz"
@@ -32,8 +32,8 @@ project(ledger-kusama VERSION 0.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
 cmake_policy(SET CMP0025 NEW)
-#cmake_policy(SET CMP0144 NEW)
 
+cmake_policy(SET CMP0144 NEW)
 set(HUNTER_STATUS_DEBUG ON)
 set(HUNTER_TLS_VERIFY ON)
 
