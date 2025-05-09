@@ -19,8 +19,11 @@
 extern "C" {
 #endif
 
+#include <parser_common.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <substrate_types.h>
+#include <zxerror.h>
 
 // Common read functions
 

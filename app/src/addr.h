@@ -19,6 +19,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#include <zxmacros.h>
+
 #include "zxerror.h"
 
 /// Return the number of items in the address view
