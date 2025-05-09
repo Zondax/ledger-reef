@@ -18,8 +18,8 @@ import Zemu, { ButtonKind, isTouchDevice, zondaxMainmenuNavigation } from '@zond
 import { newSubstrateApp } from '@zondax/ledger-substrate'
 import { models, defaultOptions } from './common'
 
-const expected_address = 'JMdbWK5cy3Bm4oCyhWNLQJoC4cczNgJsyk7nLZHMqFT7z7R'
-const expected_pk = 'ffbc10f71d63e0da1b9e7ee2eb4037466551dc32b9d4641aafd73a65970fae42'
+const expected_address = '5Enz8nQrr5cARzmvGnWGLSTMyuNC8JNuWAPYuViwKCP685Yb'
+const expected_pk = '78b791eb8e7286e0f6705d1a88907965421f340d26fb11dcda11601b52080913'
 
 jest.setTimeout(180000)
 
@@ -48,7 +48,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+      const app = newSubstrateApp(sim.getTransport(), 'Reef')
       const resp = await app.getVersion()
 
       console.log(resp)
@@ -68,7 +68,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+      const app = newSubstrateApp(sim.getTransport(), 'Reef')
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000)
 
@@ -93,7 +93,7 @@ describe('Standard', function () {
         approveKeyword: isTouchDevice(m.name) ? 'Confirm' : '',
         approveAction: ButtonKind.ApproveTapButton,
       })
-      const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+      const app = newSubstrateApp(sim.getTransport(), 'Reef')
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -122,7 +122,7 @@ describe('Standard', function () {
         model: m.name,
         rejectKeyword: isTouchDevice(m.name) ? 'Confirm' : '',
       })
-      const app = newSubstrateApp(sim.getTransport(), 'Kusama')
+      const app = newSubstrateApp(sim.getTransport(), 'Reef')
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu

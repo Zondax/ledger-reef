@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2024  Zondax AG
+ *  (c) 2019 - 2025  Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -362,12 +362,12 @@ uint16_t __address_type;
 
 uint16_t _getAddressType() { return __address_type; }
 
-uint16_t _detectAddressType(const parser_context_t *c) {
+uint16_t _detectAddressType(const parser_context_t *ctx) {
     char hashstr[65];
-    uint8_t pc;
+    uint8_t pc = 0;
 
-    if (c->tx_obj->genesisHash._ptr != NULL) {
-        _toStringHash(&c->tx_obj->genesisHash, hashstr, 65, 0, &pc);
+    if (ctx->tx_obj->genesisHash._ptr != NULL) {
+        _toStringHash(&ctx->tx_obj->genesisHash, hashstr, 65, 0, &pc);
 
         // Compare with known genesis hashes
         if (strcmp(hashstr, COIN_GENESIS_HASH) == 0) {

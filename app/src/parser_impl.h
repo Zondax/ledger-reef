@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2024  Zondax AG
+ *  (c) 2019 - 2025  Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ extern "C" {
     if ((SIZE) % outLenNormalized != 0) *pageCount += 1;                          \
     const uint16_t pageOffset = pageIdx * outLenNormalized;                       \
     uint16_t loopmax = outLenNormalized;                                          \
-    if (loopmax > (SIZE) - pageOffset) loopmax = (SIZE) - pageOffset;             \
+    if (loopmax > (SIZE)-pageOffset) loopmax = (SIZE)-pageOffset;                 \
     for (uint16_t i = 0; i < loopmax; i++) {                                      \
         const uint16_t offset = i << 1u;                                          \
         const uint8_t *c = v->_ptr + pageOffset;                                  \
@@ -148,8 +148,7 @@ GEN_DEC_READFIX_UNSIGNED(64);
         snprintf(outValue, outValueLen, "<Empty>");                                                  \
         return parser_ok;                                                                            \
     }                                                                                                \
-    /* We need to do it twice because there is no memory to keep intermediate                        \
-     * results*/                                                                                     \
+    /* We need to do it twice because there is no memory to keep intermediate results*/              \
     /* First count*/                                                                                 \
     parser_init(&ctx, v->_ptr, v->_lenBuffer);                                                       \
     for (uint64_t i = 0; i < v->_len; i++) {                                                         \
@@ -176,27 +175,27 @@ GEN_DEC_READFIX_UNSIGNED(64);
 
 parser_error_t parser_init(parser_context_t *ctx, const uint8_t *buffer, uint16_t bufferSize);
 
-parser_error_t _readBool(parser_context_t *c, pd_bool_t *value);
+parser_error_t _readBool(parser_context_t *ctx, pd_bool_t *value);
 
-parser_error_t _readCompactInt(parser_context_t *c, compactInt_t *v);
+parser_error_t _readCompactInt(parser_context_t *ctx, compactInt_t *v);
 
-parser_error_t _readCompactBalance(parser_context_t *c, pd_CompactBalance_t *v);
+parser_error_t _readCompactBalance(parser_context_t *ctx, pd_CompactBalance_t *v);
 
 parser_error_t _getValue(const compactInt_t *c, uint64_t *v);
 
-parser_error_t _readCallIndex(parser_context_t *c, pd_CallIndex_t *v);
+parser_error_t _readCallIndex(parser_context_t *ctx, pd_CallIndex_t *v);
 
-parser_error_t _readEra(parser_context_t *c, pd_ExtrinsicEra_t *v);
+parser_error_t _readEra(parser_context_t *ctx, pd_ExtrinsicEra_t *v);
 
-parser_error_t _readTx(parser_context_t *c, parser_tx_t *v);
+parser_error_t _readTx(parser_context_t *ctx, parser_tx_t *v);
 
-parser_error_t _checkVersions(parser_context_t *c);
+parser_error_t _checkVersions(parser_context_t *ctx);
 
 uint16_t _getAddressType();
 
-parser_error_t _readCompactIndex(parser_context_t *c, pd_CompactIndex_t *v);
+parser_error_t _readCompactIndex(parser_context_t *ctx, pd_CompactIndex_t *v);
 
-uint16_t _detectAddressType(const parser_context_t *c);
+uint16_t _detectAddressType(const parser_context_t *ctx);
 
 parser_error_t _toStringCompactInt(const compactInt_t *c, uint8_t decimalPlaces, bool trimTrailingZeros,
                                    const char postfix[], const char prefix[], char *outValue, uint16_t outValueLen,
