@@ -61,18 +61,15 @@ APP_SOURCE_PATH += src
 # Application icons following guidelines:
 # https://developers.ledger.com/docs/embedded-app/design-requirements/#device-icon
 
-DEFAULT_NANOS_ICON = nanos_$(ICON_NAME).gif
 DEFAULT_NBGL_ICON_32 = stax_$(ICON_NAME).gif
 DEFAULT_NBGL_ICON_64 = stax_$(ICON_NAME)_64.gif
 
 copy_icon:
-	cp $(DEFAULT_NANOS_ICON) glyphs/icon_app.gif
 	cp $(DEFAULT_NBGL_ICON_32) glyphs/icon_stax_32.gif
 	cp $(DEFAULT_NBGL_ICON_64) glyphs/icon_stax_64.gif
 
 all: copy_icon
 
-ICON_NANOS = nanos_icon.gif
 ICON_NANOX = nanox_icon.gif
 ICON_NANOSP = nanox_icon.gif
 ICON_STAX = stax_icon.gif
