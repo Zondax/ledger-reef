@@ -907,7 +907,7 @@ parser_error_t _toStringLookupSource(const pd_LookupSource_t *v, char *outValue,
 
 parser_error_t _toStringPercent(const pd_Percent_t *v, char *outValue, uint16_t outValueLen, uint8_t pageIdx,
                                 uint8_t *pageCount) {
-    char bufferUI[50];
+    char bufferUI[51];
     char bufferRatio[50];
 
     uint64_to_str(bufferRatio, sizeof(bufferRatio), v->value);
