@@ -3,6 +3,8 @@
 #include <cstdio>
 
 #include "parser.h"
+#include "parser_common.h"
+#include "parser_txdef.h"
 
 #ifdef NDEBUG
 #error "This fuzz target won't work correctly with NDEBUG defined, which will cause asserts to be eliminated"
@@ -10,8 +12,9 @@
 
 using std::size_t;
 
-static char PARSER_KEY[16384];
-static char PARSER_VALUE[16384];
+namespace {
+char PARSER_KEY[16384];
+char PARSER_VALUE[16384];
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     parser_tx_t txObj;
@@ -31,7 +34,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     uint8_t num_items;
     rc = parser_getNumItems(&ctx, &num_items);
     if (rc != parser_ok) {
-        fprintf(stderr, "error in parser_getNumItems: %s\n", parser_getErrorDescription(rc));
+        (void)fprintf(stderr, "error in parser_getNumItems: %s\n", parser_getErrorDescription(rc));
         assert(false);
     }
 
@@ -47,8 +50,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
             //            fprintf(stderr, "%s = %s\n", PARSER_KEY, PARSER_VALUE);
 
             if (rc != parser_ok) {
-                fprintf(stderr, "error getting item %u at page index %u: %s\n", (unsigned)i, (unsigned)page_idx,
-                        parser_getErrorDescription(rc));
+                (void)fprintf(stderr, "error getting item %u at page index %u: %s\n", (unsigned)i, (unsigned)page_idx,
+                              parser_getErrorDescription(rc));
                 assert(false);
             }
 
@@ -58,3 +61,4 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 
     return 0;
 }
+}  // namespace
