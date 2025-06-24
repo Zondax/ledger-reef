@@ -167,41 +167,41 @@ target_include_directories(app_lib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/app/src/substrate
 )
 
-# #############################################################
-# #############################################################
-# Tests
-file(GLOB_RECURSE TESTS_SRC
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
+##############################################################
+#  Fuzz Targets
+if(ENABLE_FUZZING)
+    set(FUZZ_TARGETS
+        parser_parse
+        )
 
-add_executable(unittests ${TESTS_SRC})
-target_include_directories(unittests PRIVATE
-    ${gtest_SOURCE_DIR}/include
-    ${gmock_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/app/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/app/src/lib
-)
+    foreach(target ${FUZZ_TARGETS})
+        add_executable(fuzz-${target} ${CMAKE_CURRENT_SOURCE_DIR}/fuzz/${target}.cpp)
+        target_link_libraries(fuzz-${target} PRIVATE 
+        app_lib)
+        target_link_options(fuzz-${target} PRIVATE "-fsanitize=fuzzer")
+    endforeach()
+else()
+    ##############################################################
+    #  Tests
+    file(GLOB_RECURSE TESTS_SRC
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
 
-target_link_libraries(unittests PRIVATE
+    add_executable(unittests ${TESTS_SRC})
+    target_include_directories(unittests PRIVATE
+        ${gtest_SOURCE_DIR}/include
+        ${gmock_SOURCE_DIR}/include
+        ${CONAN_INCLUDE_DIRS_FMT}
+        ${CMAKE_CURRENT_SOURCE_DIR}/app/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/app/src/lib
+        )
+
+    target_link_libraries(unittests PRIVATE
     app_lib
     GTest::gtest_main
     fmt::fmt
     nlohmann_json::nlohmann_json)
 
-add_compile_definitions(TESTVECTORS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/tests/")
-add_test(NAME unittests COMMAND unittests)
-set_tests_properties(unittests PROPERTIES WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
-
-# #############################################################
-# #############################################################
-# Fuzz Targets
-if(ENABLE_FUZZING)
-    set(FUZZ_TARGETS
-        parser_parse
-    )
-
-    foreach(target ${FUZZ_TARGETS})
-        add_executable(fuzz-${target} ${CMAKE_CURRENT_SOURCE_DIR}/fuzz/${target}.cpp)
-        target_link_libraries(fuzz-${target} PRIVATE app_lib)
-        target_link_options(fuzz-${target} PRIVATE "-fsanitize=fuzzer")
-    endforeach()
+    add_compile_definitions(TESTVECTORS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/tests/")
+    add_test(NAME unittests COMMAND unittests)
+    set_tests_properties(unittests PROPERTIES WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 endif()
